@@ -1,14 +1,47 @@
-from typing import List
+import os
+from supabase import create_client, Client
+from dotenv import load_dotenv
 
-_feedbacks = []
+load_dotenv()
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def add_feedback(entry: dict):
-    _feedbacks.append(entry)
+    # Map the dictionary to our Supabase columns
+    data = {
+        "student_name": entry.get("studentName", "Anonymous"),
+        "subject": entry.get("subject"),
+        "rating": entry.get("rating"),
+        "review": entry.get("review")
+    }
+    supabase.table("feedback").insert(data).execute()
 
-def get_all_feedback() -> List[dict]:
-    return _feedbacks
+def get_all_feedback() -> list:
+    try:
+        response = supabase.table("feedback").select("*").order("created_at", desc=False).execute()
+        feedbacks = []
+        for row in response.data:
+            feedbacks.append({
+                "studentName": row.get("student_name"),
+                "subject": row.get("subject"),
+                "rating": row.get("rating"),
+                "review": row.get("review"),
+                "submittedAt": row.get("created_at")
+            })
+        return feedbacks
+    except Exception as e:
+        print("Error fetching from Supabase:", e)
+        return []
 
 def get_average_rating() -> float:
-    if not _feedbacks:
+    try:
+        response = supabase.table("feedback").select("rating").execute()
+        data = response.data
+        if not data:
+            return 0.0
+        return round(sum(row["rating"] for row in data) / len(data), 2)
+    except Exception as e:
+        print("Error fetching average rating:", e)
         return 0.0
-    return round(sum(f["rating"] for f in _feedbacks) / len(_feedbacks), 2)
