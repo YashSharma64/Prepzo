@@ -157,6 +157,7 @@ _QUESTION_FORMAT_PALETTE = """QUESTION FORMAT VARIETY — use AT LEAST 5 differe
   [TRADEOFF]    "What are the advantages and limitations of X compared to Y in context Z?"
   [DESIGN]      "Design a solution for [problem] using X. Justify your architectural choices."
   [SCENARIO]    "A developer encounters [specific problem]. What went wrong and how do you fix it?"
+  [CODING]      "Write a function/script to implement [algorithm/feature]. Handle edge cases. Must include leetcode, hackerrank, geeksforgeeks style questions if possible or require."
 
 VARIETY ENFORCEMENT:
   - Do NOT start more than 2 questions with the same opening word (Explain, Describe, What, How, etc.)
@@ -285,7 +286,8 @@ ABSOLUTE RULES — violating any of these invalidates your response:
 7. Questions must be specific and testable — follow the format palette, not generic templates.
 8. No two questions may test the same specific concept or have >70% wording overlap.
 9. Solutions must be factually accurate, exam-oriented, and match the solution format above.
-10. If a topic has a [MUST USE QUESTION TYPE: <type>] tag, questions for that topic MUST use that exact type."""
+10. If a topic has a [MUST USE QUESTION TYPE: <type>] tag, questions for that topic MUST use that exact type.
+11. CODING QUESTIONS: If "type" is "coding", the "solution" field MUST include a clear code snippet/implementation and a brief explanation. The question must be a practical problem."""
 
 
 def build_retry_prompt(subject: str, topics: list, mode: str) -> str:
@@ -304,6 +306,7 @@ Each question needs all 6 fields:
 - difficulty: exactly easy, medium, or hard
 - probability: a number between 0.5 and 0.99
 - topic: must be one of the topics listed above
+- For "coding" types, "solution" MUST contain an actual code snippet.
 Generate {cfg["q_min"]} diverse questions covering different topics from the list."""
 
 
