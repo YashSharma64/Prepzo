@@ -287,7 +287,8 @@ ABSOLUTE RULES — violating any of these invalidates your response:
 8. No two questions may test the same specific concept or have >70% wording overlap.
 9. Solutions must be factually accurate, exam-oriented, and match the solution format above.
 10. If a topic has a [MUST USE QUESTION TYPE: <type>] tag, questions for that topic MUST use that exact type.
-11. CODING QUESTIONS: If "type" is "coding", the "solution" field MUST include a clear code snippet/implementation and a brief explanation. The question must be a practical problem."""
+11. CODING QUESTIONS: If "type" is "coding", the question MUST be formatted like a LeetCode, HackerRank, or GeeksforGeeks problem (with a clear scenario, input/output examples, and constraints). The "solution" field MUST include a clear code snippet enclosed in standard multiline markdown code blocks (e.g., \\n```python\\ndef foo():\\n    pass\\n```\\n) and a brief explanation. Use explicit \\n characters in the JSON string for proper line-by-line formatting.
+12. MCQ QUESTIONS: If "type" is "MCQ", the "question" field MUST include exactly 4 distinct and plausible options (A, B, C, D) formatted on new lines using explicit \\n characters."""
 
 
 def build_retry_prompt(subject: str, topics: list, mode: str) -> str:
@@ -306,7 +307,8 @@ Each question needs all 6 fields:
 - difficulty: exactly easy, medium, or hard
 - probability: a number between 0.5 and 0.99
 - topic: must be one of the topics listed above
-- For "coding" types, "solution" MUST contain an actual code snippet.
+- For "coding" types, "solution" MUST contain an actual code snippet enclosed in multiline markdown code blocks with explicit \\n for line breaks.
+- For "MCQ" types, "question" MUST include exactly 4 options (A, B, C, D) separated by \\n.
 Generate {cfg["q_min"]} diverse questions covering different topics from the list."""
 
 
