@@ -241,7 +241,6 @@ export default function AnalyticsPage() {
             {/* Stat Cards */}
             <div style={{ display: 'flex', gap: 16, marginBottom: 32, flexWrap: 'wrap' }}>
               <StatCard label="Plans Generated" value={data.totalPlansGenerated || 0} icon="📋" color="#6C63FF" />
-              <StatCard label="Chat Messages" value={data.chat_msgs || 0} icon="💬" color="#0D9E6E" />
               <StatCard label="Users" value={data.users_count || 0} icon="👥" color="#D4910A" />
             </div>
 
