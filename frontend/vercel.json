@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://prepzo-10i9.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
