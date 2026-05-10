@@ -209,8 +209,8 @@ export default function ResultPage() {
           paddingBottom: 80,
           maxWidth: 800,
           margin: '0 auto',
-          paddingLeft: 24,
-          paddingRight: 24,
+          paddingLeft: isMobile ? 16 : 24,
+          paddingRight: isMobile ? 16 : 24,
         }}
       >
         {/* Header */}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useViewport } from '../hooks/useViewport';
 
 const MOODS = {
   1: 'Poor',
@@ -38,6 +39,7 @@ export default function FeedbackSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const { isMobile } = useViewport();
 
   // Feedbacks State
   const [feedbacksData, setFeedbacksData] = useState({
@@ -112,7 +114,7 @@ export default function FeedbackSection() {
       <hr style={{ border: 'none', borderTop: '1px solid #eaeaea', marginBottom: '40px' }} />
       
       {/* PART 1: SUBMISSION FORM */}
-      <div style={{ backgroundColor: '#ffffff', borderRadius: '12px', padding: '30px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', marginBottom: '40px', border: '1px solid #f0f0f0' }}>
+      <div style={{ backgroundColor: '#ffffff', borderRadius: '12px', padding: isMobile ? '20px' : '30px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', marginBottom: '40px', border: '1px solid #f0f0f0' }}>
         <h2 style={{ margin: '0 0 20px 0', fontSize: '24px', fontWeight: '600', color: '#111827' }}>How was your experience?</h2>
         
         {isSubmitted ? (

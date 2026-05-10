@@ -201,8 +201,8 @@ export default function InputPage() {
           paddingBottom: 80,
           maxWidth: 560,
           margin: '0 auto',
-          paddingLeft: 24,
-          paddingRight: 24,
+          paddingLeft: isMobile ? 16 : 24,
+          paddingRight: isMobile ? 16 : 24,
         }}
       >
         <div style={{ marginBottom: 40 }}>
