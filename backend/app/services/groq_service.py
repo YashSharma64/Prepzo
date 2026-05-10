@@ -332,16 +332,25 @@ def _validate_and_clean_question(q: dict, valid_topics: list) -> Optional[dict]:
     q["question"] = question_text
 
     # type — normalize with fuzzy matching
-    raw_type = str(q.get("type", "")).strip()
-    if raw_type in VALID_TYPES:
-        q["type"] = raw_type
-    elif raw_type.upper() == "MCQ" or any(w in raw_type.lower() for w in ("multiple", "choice", "mcq")):
+    raw_type = str(q.get("type", "")).strip().lower()
+    
+    if raw_type == "mcq":
         q["type"] = "MCQ"
-    elif any(w in raw_type.lower() for w in ("code", "coding", "program", "implement")):
+    elif raw_type == "coding":
         q["type"] = "coding"
-    elif any(w in raw_type.lower() for w in ("theory", "theoret", "descript", "essay")):
+    elif raw_type == "theory":
         q["type"] = "theory"
+    elif "mcq" in raw_type or "multiple" in raw_type or "choice" in raw_type:
+        q["type"] = "MCQ"
+    elif "theory" in raw_type or "theoret" in raw_type or "descript" in raw_type or "essay" in raw_type:
+        q["type"] = "theory"
+    elif "code" in raw_type or "coding" in raw_type or "program" in raw_type or "implement" in raw_type:
+        q["type"] = "coding"
     else:
+        q["type"] = "theory"
+
+    # Heuristic: if it's tagged as coding but lacks a code block in the solution, it's actually a theory question
+    if q["type"] == "coding" and "```" not in str(q.get("solution", "")):
         q["type"] = "theory"
 
     # difficulty — normalize
