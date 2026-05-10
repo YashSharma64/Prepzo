@@ -18,6 +18,7 @@ export default function ClusteringPanel({ clustering, onAddTopic }) {
     >
       <div style={{ marginBottom: 16 }}>
         <span
+          title="We use machine learning (K-Means) to automatically group related topics from your text together."
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: 11,
@@ -26,6 +27,7 @@ export default function ClusteringPanel({ clustering, onAddTopic }) {
             textTransform: 'uppercase',
             display: 'block',
             marginBottom: 4,
+            cursor: 'help',
           }}
         >
           K-Means Topic Clustering — Auto-Discovered

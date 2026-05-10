@@ -136,6 +136,7 @@ export default function PatternAnalysisPanel({ analysis }) {
       }}>
         <div style={{ minWidth: 0 }}>
           <span
+            title="We use math (Cosine Similarity) to find questions that are frequently asked in the same way."
             style={{
               fontFamily: "'DM Mono', monospace",
               fontSize: 11,
@@ -144,9 +145,10 @@ export default function PatternAnalysisPanel({ analysis }) {
               textTransform: 'uppercase',
               display: 'block',
               marginBottom: 4,
+              cursor: 'help',
             }}
           >
-            Past Paper Pattern Analysis — Cosine Similarity
+            Document Pattern Analysis — Cosine Similarity
           </span>
           <span style={{ fontFamily: "'Sora', sans-serif", fontSize: 13, color: '#6B6B80' }}>
             Detected repeating question patterns from your uploaded document

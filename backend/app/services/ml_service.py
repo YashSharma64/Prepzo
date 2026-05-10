@@ -109,6 +109,9 @@ TRAINING_DATA = [
     ("role importance significance purpose need why", "theory"),
     ("theory fundamentals basics concepts overview summary", "theory"),
     ("advantages limitations drawbacks benefits merits demerits", "theory"),
+    ("history evolution origins timeline background context impact", "theory"),
+    ("causes effects consequences evaluate assess critique", "theory"),
+    ("framework protocol standard model process methodology", "theory"),
 
     # Coding patterns
     ("implement write code program function algorithm", "coding"),
@@ -119,6 +122,9 @@ TRAINING_DATA = [
     ("design pattern implementation observer strategy factory singleton", "coding"),
     ("write a program to implement develop create build", "coding"),
     ("data structure algorithm complexity time space", "coding"),
+    ("query sql database fetch return select where join api", "coding"),
+    ("script configure deploy component react hook prop state", "coding"),
+    ("refactor optimize refactoring exception try catch error handling", "coding"),
 
     # MCQ patterns
     ("which of the following select correct option choose", "MCQ"),
@@ -127,6 +133,8 @@ TRAINING_DATA = [
     ("abbreviation full form stands for acronym", "MCQ"),
     ("short answer one word quick recall fact", "MCQ"),
     ("identify select pick correct incorrect right wrong", "MCQ"),
+    ("multiple choice choose one valid invalid option a b c d", "MCQ"),
+    ("is it true that state whether the following is correct", "MCQ"),
 ]
 
 # Build the classifier once at module load
