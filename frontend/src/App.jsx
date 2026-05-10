@@ -30,10 +30,23 @@ function AnimatedRoutes() {
   const location = useLocation();
   const { user, isSignedIn } = useUser();
 
-  // Sync Clerk user to Supabase on every sign-in
+  // Sync Clerk user to Supabase on every sign-in and clear old state on account switch
   useEffect(() => {
     if (isSignedIn && user) {
       upsertUser(user);
+    }
+
+    const storedUserId = localStorage.getItem('prepzo_user_id');
+    if (user?.id) {
+      if (storedUserId !== user.id) {
+        // Different user logged in, clear previous results
+        localStorage.removeItem('prepzo_last_result');
+        localStorage.setItem('prepzo_user_id', user.id);
+      }
+    } else {
+      // User logged out, clear results
+      localStorage.removeItem('prepzo_last_result');
+      localStorage.removeItem('prepzo_user_id');
     }
   }, [isSignedIn, user]);
 
