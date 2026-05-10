@@ -30,6 +30,11 @@ function AnimatedRoutes() {
   const location = useLocation();
   const { user, isSignedIn } = useUser();
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Sync Clerk user to Supabase on every sign-in and clear old state on account switch
   useEffect(() => {
     if (isSignedIn && user) {
